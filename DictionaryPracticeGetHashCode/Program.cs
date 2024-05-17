@@ -7,7 +7,8 @@ ace.Add(give, 1);
 
 try
 {
-    ace[new Give(1.2m, 3)] = 5;
+    Give give2 = new(1.2m, 3);
+    ace[give2] = 5;
     Console.WriteLine("The try block worked.");
 }
 catch
@@ -17,8 +18,10 @@ catch
 
 Console.WriteLine(ace[give]);
 // Since we are overriding GetHashCode(), it returns the same hash code for
-// ace[new Give(1.2m, 3)] = 5 and ace[give], so it locates the key and returns the value.
-// If we comment out GetHashCode(), Console.WriteLine(ace[give]); will print 1, untouched.
+// ace[new Give(1.2m, 3)] = 5 and ace[give], so it can locate the key and returns the value.
+// If we comment out GetHashCode(), then give and give2 will have different hash codes,
+// therefore the dictionary will treat them as different keys.
+// Console.WriteLine(ace[give]); will print 1, untouched.
 public class Give : IEquatable<Give?>
 {
     public decimal? Value { get; set; }
